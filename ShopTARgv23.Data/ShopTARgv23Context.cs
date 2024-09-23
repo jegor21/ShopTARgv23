@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using ShopTARgv23.Core.Domain;
 
 namespace ShopTARgv23.Data
 {
-    internal class ShopTARgv23Context
+    public class ShopTARgv23Context : DbContext
     {
+        public ShopTARgv23Context(DbContextOptions<ShopTARgv23Context> options) : base(options)
+        { }
+
+        public DbSet<Spaceship> Spaceships { get; set; }
     }
 }

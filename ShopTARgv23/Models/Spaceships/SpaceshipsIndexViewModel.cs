@@ -1,7 +1,6 @@
-﻿
-namespace ShopTARgv23.Core.Domain
+﻿namespace ShopTARgv23.Models.Spaceships
 {
-    public class Spaceship
+    public class SpaceshipsIndexViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -15,14 +14,5 @@ namespace ShopTARgv23.Core.Domain
         public int Crew { get; set; }
 
         public int EnginePower { get; set; }
-
-        //only in db
-
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime ModifiedAt { get; set; }
-
-
-
     }
 }
