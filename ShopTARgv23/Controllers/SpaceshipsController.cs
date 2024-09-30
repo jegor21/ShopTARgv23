@@ -31,11 +31,42 @@ namespace ShopTARgv23.Controllers
                     Id = x.Id,
                     Name = x.Name,
                     Type = x.Type,
-                    BuildDate = x.BuildDate,
+                    BuiltDate = x.BuiltDate,
                     EnginePower = x.EnginePower,
                 });
 
             return View();
+        }
+
+        public IActionResult Create()
+        {
+            SpaceshipCreateUpdateViewModel spaceship = new();
+
+            return View("CreateUpdate", spaceship);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(SpaceshipCreateUpdateViewModel vm)
+        {
+            var dto = new SpaceshipDto()
+            {
+                Id =vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                BuiltDate = vm.BuiltDate,
+                CargoWeight = vm.CargoWeight,
+                Crew = vm.Crew,
+                EnginePower= vm.EnginePower,
+            };
+
+            var result = await _spaceshipServices.Create(dto);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index), vm);
         }
 
         [HttpGet]
@@ -53,7 +84,7 @@ namespace ShopTARgv23.Controllers
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Type = spaceship.Type;
-            vm.BuildDate = spaceship.BuildDate;
+            vm.BuiltDate = spaceship.BuiltDate;
             vm.CargoWeight = spaceship.CargoWeight;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;
@@ -78,7 +109,7 @@ namespace ShopTARgv23.Controllers
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Type = spaceship.Type;
-            vm.BuildDate = spaceship.BuildDate;
+            vm.BuiltDate = spaceship.BuiltDate;
             vm.CargoWeight= spaceship.CargoWeight;
             vm.Crew = spaceship.Crew;
             vm.EnginePower= spaceship.EnginePower;
@@ -94,7 +125,7 @@ namespace ShopTARgv23.Controllers
             dto.Id = vm.Id;
             dto.Name = vm.Name;
             dto.Type = vm.Type;
-            dto.BuildDate = vm.BuildDate;
+            dto.BuiltDate = vm.BuiltDate;
             dto.CargoWeight = vm.CargoWeight;
             dto.Crew = vm.Crew;
             dto.EnginePower = vm.EnginePower;
@@ -126,7 +157,7 @@ namespace ShopTARgv23.Controllers
             vm.Id = spaceship.Id;
             vm.Name = spaceship.Name;
             vm.Type = spaceship.Type;
-            vm.BuildDate = spaceship.BuildDate;
+            vm.BuiltDate = spaceship.BuiltDate;
             vm.CargoWeight = spaceship.CargoWeight;
             vm.Crew = spaceship.Crew;
             vm.EnginePower = spaceship.EnginePower;

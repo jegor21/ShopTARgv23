@@ -24,11 +24,11 @@ namespace ShopTARgv23.Data.Migrations
 
             modelBuilder.Entity("ShopTARgv23.Core.Domain.Spaceship", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("BuildDate")
+                    b.Property<DateTime>("BuiltDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("CargoWeight")

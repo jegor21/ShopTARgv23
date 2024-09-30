@@ -2,12 +2,10 @@
 
 @{
     int rowNumber = 1;
-
 }
 
-
 <div>
-    <a asp-action="create" asp-controller="Spaceships" type="submit" class="btn-primary">Create</a>
+    <a asp-action="create" asp-controller="Spaceships" type="submit" class="btn btn-primary">Create</a>
 </div>
 
 <div class="h1">
@@ -21,7 +19,7 @@
                 <th scope="col">Nr</th>
                 <th scope="col">Name</th>
                 <th scope="col">Type</th>
-                <th scope="col">Build date</th>
+                <th scope="col">Built date</th>
                 <th scope="col">Engine Power</th>
                 <th scope="col"></th>
             </tr>
@@ -33,7 +31,7 @@
                     <td>@rowNumber</td>
                     <td>@spaceships.Name</td>
                     <td>@spaceships.Type</td>
-                    <td>@spaceships.BuildDate</td>
+                    <td>@spaceships.BuiltDate</td>
                     <td>@spaceships.EnginePower</td>
                     <td>
                         <a asp-action="details" asp-controller="spaceships" asp-route-id="@spaceships.Id" class="btn btn-info">Details</a>

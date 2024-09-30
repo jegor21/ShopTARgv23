@@ -18,7 +18,7 @@ namespace ShopTARgv23.Data.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BuildDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BuiltDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CargoWeight = table.Column<int>(type: "int", nullable: false),
                     Crew = table.Column<int>(type: "int", nullable: false),
                     EnginePower = table.Column<int>(type: "int", nullable: false),
