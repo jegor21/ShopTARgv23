@@ -66,7 +66,10 @@ else
             </div>
         </div>
 
-
+        @foreach (var images in Model.FileToApiViewModels)
+        {
+            <partial name="_Images" model="images" />
+        }
 
 
         @if (Model.Id.HasValue)
@@ -78,6 +81,7 @@ else
             <input asp-action="create" asp-controller="spaceships" type="submit" class="btn btn-primary" value="Create" />
         }
 
+        <input asp-action="index" asp-controller="spaceships" type="submit" class="btn btn-outline-secondary" value="Back" />
 
     </form>
 </div>

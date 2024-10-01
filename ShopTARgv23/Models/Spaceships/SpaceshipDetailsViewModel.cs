@@ -15,6 +15,9 @@
 
         public int EnginePower { get; set; }
 
+        public List<FileToApiViewModel> FileToApiViewModels { get; set; }
+            = new List<FileToApiViewModel>();
+
         //only in db
 
         public DateTime CreatedAt { get; set; }
