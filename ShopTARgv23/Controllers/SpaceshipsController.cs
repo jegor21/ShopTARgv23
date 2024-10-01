@@ -1,15 +1,14 @@
-﻿using ShopTARgv23.Models.Spaceships;
-using Microsoft.AspNetCore.Mvc;
-using ShopTARgv23.Data;
-using ShopTARgv23.Core.ServiceInterface;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
+using ShopTARgv23.Core.ServiceInterface;
+using ShopTARgv23.Data;
+using ShopTARgv23.Models.Spaceships;
 
 namespace ShopTARgv23.Controllers
 {
     public class SpaceshipsController : Controller
     {
-
         private readonly ShopTARgv23Context _context;
         private readonly ISpaceshipServices _spaceshipServices;
 
@@ -32,12 +31,13 @@ namespace ShopTARgv23.Controllers
                     Name = x.Name,
                     Type = x.Type,
                     BuiltDate = x.BuiltDate,
-                    EnginePower = x.EnginePower,
+                    EnginePower = x.EnginePower
                 });
 
-            return View();
+            return View(result);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
             SpaceshipCreateUpdateViewModel spaceship = new();
@@ -50,13 +50,21 @@ namespace ShopTARgv23.Controllers
         {
             var dto = new SpaceshipDto()
             {
-                Id =vm.Id,
+                Id = vm.Id,
                 Name = vm.Name,
                 Type = vm.Type,
                 BuiltDate = vm.BuiltDate,
                 CargoWeight = vm.CargoWeight,
                 Crew = vm.Crew,
-                EnginePower= vm.EnginePower,
+                EnginePower = vm.EnginePower,
+                Files = vm.Files,
+                Image = vm.FileToApiViewModels
+                    .Select(x => new FileToApiDto
+                    {
+                        Id = x.ImageId,
+                        ExistingFilePath = x.FilePath,
+                        SpaceshipId = x.SpaceshipId,
+                    }).ToArray()
             };
 
             var result = await _spaceshipServices.Create(dto);
@@ -110,18 +118,20 @@ namespace ShopTARgv23.Controllers
             vm.Name = spaceship.Name;
             vm.Type = spaceship.Type;
             vm.BuiltDate = spaceship.BuiltDate;
-            vm.CargoWeight= spaceship.CargoWeight;
+            vm.CargoWeight = spaceship.CargoWeight;
             vm.Crew = spaceship.Crew;
-            vm.EnginePower= spaceship.EnginePower;
+            vm.EnginePower = spaceship.EnginePower;
+            vm.ModifiedAt = spaceship.ModifiedAt;
+            vm.CreatedAt = spaceship.CreatedAt;
 
             return View("CreateUpdate", vm);
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Update(SpaceshipCreateUpdateViewModel vm)
         {
             var dto = new SpaceshipDto();
-            
+
             dto.Id = vm.Id;
             dto.Name = vm.Name;
             dto.Type = vm.Type;

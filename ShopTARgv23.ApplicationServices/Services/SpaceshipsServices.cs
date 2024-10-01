@@ -4,24 +4,28 @@ using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 
+
 namespace ShopTARgv23.ApplicationServices.Services
 {
     public class SpaceshipsServices : ISpaceshipServices
     {
         private readonly ShopTARgv23Context _context;
+        private readonly IFileServices _fileServices;
 
         public SpaceshipsServices
             (
-                ShopTARgv23Context context
+                ShopTARgv23Context context,
+                IFileServices fileServices
             )
         {
             _context = context;
+            _fileServices = fileServices;
         }
 
         public async Task<Spaceship> DetailsAsync(Guid id)
         {
             var result = await _context.Spaceships
-                .FirstOrDefaultAsync( x => x.Id == id );
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             return result;
         }
@@ -39,6 +43,7 @@ namespace ShopTARgv23.ApplicationServices.Services
             spaceship.EnginePower = dto.EnginePower;
             spaceship.CreatedAt = DateTime.Now;
             spaceship.ModifiedAt = DateTime.Now;
+            _fileServices.FilesToApi(dto, spaceship);
 
             await _context.Spaceships.AddAsync(spaceship);
             await _context.SaveChangesAsync();
@@ -51,8 +56,8 @@ namespace ShopTARgv23.ApplicationServices.Services
             Spaceship domain = new();
 
             domain.Id = dto.Id;
-            domain.Type = dto.Type;
             domain.Name = dto.Name;
+            domain.Type = dto.Type;
             domain.BuiltDate = dto.BuiltDate;
             domain.CargoWeight = dto.CargoWeight;
             domain.Crew = dto.Crew;
@@ -60,7 +65,7 @@ namespace ShopTARgv23.ApplicationServices.Services
             domain.CreatedAt = dto.CreatedAt;
             domain.ModifiedAt = DateTime.Now;
 
-            _context.Spaceships.Update( domain );
+            _context.Spaceships.Update(domain);
             await _context.SaveChangesAsync();
 
             return domain;
@@ -76,6 +81,5 @@ namespace ShopTARgv23.ApplicationServices.Services
 
             return spaceship;
         }
-
     }
 }
