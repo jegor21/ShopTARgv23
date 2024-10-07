@@ -4,7 +4,7 @@ using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
-using ShopTARgv23.Models.Spaceships;
+using ShopTARgv23.Models.Kindergartens;
 
 namespace ShopTARgv23.Controllers
 {

@@ -35,13 +35,7 @@ namespace ShopTARgv23
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider
-                (Path.Combine(builder.Environment.ContentRootPath, "multipleFileUpload")),
-                RequestPath = "/multipleFileUpload"
-            });
-
+            
             app.UseRouting();
 
             app.UseAuthorization();

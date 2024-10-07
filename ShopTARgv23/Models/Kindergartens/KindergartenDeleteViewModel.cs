@@ -1,4 +1,4 @@
-﻿namespace ShopTARgv23.Models.Spaceships
+﻿namespace ShopTARgv23.Models.Kindergartens
 {
     public class KindergartenDeleteViewModel
     {
