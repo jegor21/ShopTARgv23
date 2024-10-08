@@ -4,6 +4,8 @@ using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using ShopTARgv23.ApplicationServices.Services;
+using ShopTARgv23.Models.Spaceships;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace ShopTARgv23.Controllers
@@ -114,6 +116,68 @@ namespace ShopTARgv23.Controllers
             var result = await _realEstateServices.Update(dto);
 
             if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var realestate = await _realEstateServices.DetailsAsync(id);
+
+            if (realestate == null)
+            {
+                return NotFound();
+            }
+
+
+            var vm = new RealEstatesDetailsViewModel();
+
+            vm.Id = realestate.Id;
+            vm.Size = realestate.Size;
+            vm.Location = realestate.Location;
+            vm.RoomNumber = realestate.RoomNumber;
+            vm.BuildingType = realestate.BuildingType;
+            vm.CreatedAt = realestate.CreatedAt;
+            vm.ModifiedAt = realestate.ModifiedAt;
+            
+
+            return View(vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var realestate = await _realEstateServices.DetailsAsync(id);
+
+            if (realestate == null)
+            {
+                return NotFound();
+            }
+
+
+            var vm = new RealEstatesDeleteViewModel();
+
+            vm.Id = realestate.Id;
+            vm.Size = realestate.Size;
+            vm.Location = realestate.Location;
+            vm.RoomNumber = realestate.RoomNumber;
+            vm.BuildingType = realestate.BuildingType;
+            vm.CreatedAt = realestate.CreatedAt;
+            vm.ModifiedAt = realestate.ModifiedAt;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var realestate = await _realEstateServices.Delete(id);
+
+            if (realestate == null)
             {
                 return RedirectToAction(nameof(Index));
             }
