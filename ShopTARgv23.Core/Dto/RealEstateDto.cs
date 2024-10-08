@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,9 @@ namespace ShopTARgv23.Core.Dto
         public double Size { get; set; }
         public int RoomNumber { get; set; }
         public string BuildingType { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToDatabaseDto> Image { get; set; }
+            = new List<FileToDatabaseDto>();
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
     }
