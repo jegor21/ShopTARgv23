@@ -5,7 +5,7 @@
 namespace ShopTARgv23.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Realestate : Migration
+    public partial class FileToDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

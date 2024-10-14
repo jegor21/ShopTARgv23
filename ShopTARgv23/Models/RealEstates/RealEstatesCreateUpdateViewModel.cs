@@ -10,8 +10,9 @@
         public List<IFormFile> Files { get; set; }
         public List<RealEstatesImageViewModel> Image { get; set; }
             = new List<RealEstatesImageViewModel>();
-
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        
+
     }
 }
