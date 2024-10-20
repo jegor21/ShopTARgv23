@@ -16,7 +16,7 @@ namespace ShopTARgv23
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddScoped<IKindergartenServices, KindergartensServices>();
+            builder.Services.AddScoped<IKindergartenServices, KindergartenServices>();
             
 
             builder.Services.AddDbContext<ShopTARgv23Context>(options =>

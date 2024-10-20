@@ -5,11 +5,11 @@
 }
 
 <div>
-    <a asp-action="create" asp-controller="Kindergartens" type="submit" class="btn btn-primary">Create</a>
+    <a asp-action="create" asp-controller="Kindergarten" type="submit" class="btn btn-primary">Create</a>
 </div>
 
 <div class="h1">
-    Kindergartens
+    Kindergarten
 </div>
 
 <form method="post">
@@ -21,25 +21,24 @@
                 <th scope="col">ChildrenCount</th>
                 <th scope="col">KindergartenName</th>
                 <th scope="col">Teacher</th>
-                <th scope="col"></th>
+                <th scope ="col"></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var kindergartens in Model)
+            @foreach (var kindergarten in Model)
             {
                 <tr>
                     <td>@rowNumber</td>
-                    <td>@kindergartens.GroupName</td>
-                    <td>@kindergartens.ChildrenCount</td>
-                    <td>@kindergartens.KindergartenName</td>
-                    <td>@kindergartens.Teacher</td>
+                    <td>@kindergarten.GroupName</td>
+                    <td>@kindergarten.ChildrenCount</td>
+                    <td>@kindergarten.KindergartenName</td>
+                    <td>@kindergarten.Teacher</td>
                     <td>
-                        <a asp-action="details" asp-controller="kindergartens" asp-route-id="@kindergartens.Id" class="btn btn-info">Details</a>
-                        <a asp-action="update" asp-controller="kindergartens" asp-route-id="@kindergartens.Id" class="btn btn-primary">Update</a>
-                        <a asp-action="delete" asp-controller="kindergartens" asp-route-id="@kindergartens.Id" class="btn btn-outline-danger">Delete</a>
+                        <a asp-action="details" asp-controller="kindergarten" asp-route-id="@kindergarten.Id" class="btn btn-outline-primary">Details</a>
+                        <a asp-action="update" asp-controller="kindergarten" asp-route-id="@kindergarten.Id" class="btn btn-primary">Update</a>
+                        <a asp-action="delete" asp-controller="kindergarten" asp-route-id="@kindergarten.Id" class="btn btn-outline-danger">Delete</a>
                     </td>
                 </tr>
-
                 rowNumber++;
             }
         </tbody>
