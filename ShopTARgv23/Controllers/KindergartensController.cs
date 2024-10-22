@@ -5,7 +5,7 @@ using ShopTARgv23.Data;
 using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.ApplicationServices.Services;
 using ShopTARgv23.Core.Domain;
-using ShopTARgv23.Models.Kindergartens;
+using ShopTARgv23.Models.Kindergarten;
 
 namespace ShopTARgv23.Controllers
 {

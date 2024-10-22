@@ -1,6 +1,7 @@
-﻿namespace ShopTARgv23.Models.Kindergartens
+﻿
+namespace ShopTARgv23.Models.Kindergarten
 {
-    public class KindergartenDetailsViewModel
+    public class KindergartenDeleteViewModel
     {
         public Guid? Id { get; set; }
         public string? GroupName { get; set; }

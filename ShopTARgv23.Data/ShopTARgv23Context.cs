@@ -8,7 +8,7 @@ namespace ShopTARgv23.Data
         public ShopTARgv23Context(DbContextOptions<ShopTARgv23Context> options)
             : base(options) { }
 
-        public DbSet<Kindergarten> Kindergartens { get; set; }
+        
         public DbSet<FileToApi> FileToApis { get; set; }
         public DbSet<Kindergarten> Kindergarten { get; set; }
         public DbSet<FileToDatabase> FileToDatabases { get; set; }

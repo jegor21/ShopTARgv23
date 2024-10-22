@@ -1,8 +1,8 @@
-﻿namespace ShopTARgv23.Models.Kindergartens
+﻿namespace ShopTARgv23.Models.Kindergarten
 {
     public class KindergartenImageViewModel
     {
-        public Guid ImageId { get; set; }
+        public Guid? ImageId { get; set; }
         public string? ImageTitle { get; set; }
         public byte[]? ImageData { get; set; }
         public string? Image { get; set; }
