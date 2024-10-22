@@ -40,7 +40,7 @@ namespace ShopTARgv23.RealEstateTest
 
         public virtual void SetupServices(IServiceCollection services)
         {
-            services.AddScoped<IRealEstateServices, RealEstatesServices>();
+            services.AddScoped<IRealEstateServices, RealEstateServices>();
             services.AddScoped<IFileServices, FileServices>();
             services.AddScoped<IHostEnvironment, IMockHostEnvironment>();
 

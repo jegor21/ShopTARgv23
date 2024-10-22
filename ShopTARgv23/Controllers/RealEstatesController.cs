@@ -29,7 +29,7 @@ namespace ShopTARgv23.Controllers
         public IActionResult Index()
         {
             var result = _context.RealEstates
-                .Select(x => new RealEstatesIndexViewModel
+                .Select(x => new RealEstateIndexViewModel
                 {
                     Id = x.Id,
                     Location = x.Location,
@@ -44,13 +44,13 @@ namespace ShopTARgv23.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            RealEstatesCreateUpdateViewModel realEstates = new();
+            RealEstateCreateUpdateViewModel realEstates = new();
 
             return View("CreateUpdate", realEstates);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(RealEstatesCreateUpdateViewModel vm)
+        public async Task<IActionResult> Create(RealEstateCreateUpdateViewModel vm)
         {
             var dto = new RealEstateDto()
             {
@@ -103,7 +103,7 @@ namespace ShopTARgv23.Controllers
                     Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
                 }).ToArrayAsync();
 
-            var vm = new RealEstatesCreateUpdateViewModel();
+            var vm = new RealEstateCreateUpdateViewModel();
 
             vm.Id = realEstate.Id;
             vm.Size = realEstate.Size;
@@ -119,7 +119,7 @@ namespace ShopTARgv23.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(RealEstatesCreateUpdateViewModel vm)
+        public async Task<IActionResult> Update(RealEstateCreateUpdateViewModel vm)
         {
             var dto = new RealEstateDto()
             {

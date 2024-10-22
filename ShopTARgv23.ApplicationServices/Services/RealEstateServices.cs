@@ -7,12 +7,12 @@ using ShopTARgv23.Data;
 
 namespace ShopTARgv23.ApplicationServices.Services
 {
-    public class RealEstatesServices : IRealEstateServices
+    public class RealEstateServices : IRealEstateServices
     {
         private readonly ShopTARgv23Context _context;
         private readonly IFileServices _fileServices;
 
-        public RealEstatesServices
+        public RealEstateServices
             (
                 ShopTARgv23Context context,
                 IFileServices fileServices

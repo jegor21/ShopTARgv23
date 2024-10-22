@@ -12,8 +12,8 @@ using ShopTARgv23.Data;
 namespace ShopTARgv23.Data.Migrations
 {
     [DbContext(typeof(ShopTARgv23Context))]
-    [Migration("20241014115656_RealEstate")]
-    partial class RealEstate
+    [Migration("20241022090317_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,6 @@ namespace ShopTARgv23.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExistingFilePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("SpaceshipId")
@@ -50,11 +49,9 @@ namespace ShopTARgv23.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("ImageData")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("ImageTitle")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("RealEstateId")
@@ -72,23 +69,21 @@ namespace ShopTARgv23.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("BuildingType")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RoomNumber")
+                    b.Property<int?>("RoomNumber")
                         .HasColumnType("int");
 
-                    b.Property<double>("Size")
+                    b.Property<double?>("Size")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
@@ -102,30 +97,28 @@ namespace ShopTARgv23.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("BuiltDate")
+                    b.Property<DateTime?>("BuiltDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CargoWeight")
+                    b.Property<int?>("CargoWeight")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Crew")
+                    b.Property<int?>("Crew")
                         .HasColumnType("int");
 
-                    b.Property<int>("EnginePower")
+                    b.Property<int?>("EnginePower")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModifiedAt")
+                    b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

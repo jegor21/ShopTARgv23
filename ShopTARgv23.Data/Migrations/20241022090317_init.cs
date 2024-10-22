@@ -16,7 +16,7 @@ namespace ShopTARgv23.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExistingFilePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExistingFilePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SpaceshipId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -29,8 +29,8 @@ namespace ShopTARgv23.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ImageTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     RealEstateId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
@@ -43,12 +43,12 @@ namespace ShopTARgv23.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Size = table.Column<double>(type: "float", nullable: false),
-                    RoomNumber = table.Column<int>(type: "int", nullable: false),
-                    BuildingType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Size = table.Column<double>(type: "float", nullable: true),
+                    RoomNumber = table.Column<int>(type: "int", nullable: true),
+                    BuildingType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -60,14 +60,14 @@ namespace ShopTARgv23.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BuiltDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CargoWeight = table.Column<int>(type: "int", nullable: false),
-                    Crew = table.Column<int>(type: "int", nullable: false),
-                    EnginePower = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BuiltDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CargoWeight = table.Column<int>(type: "int", nullable: true),
+                    Crew = table.Column<int>(type: "int", nullable: true),
+                    EnginePower = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
