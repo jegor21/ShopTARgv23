@@ -1,9 +1,9 @@
-﻿@model ShopTARgv23.Models.RealEstates.RealEstatesDetailsViewModel
+﻿@model ShopTARgv23.Models.RealEstates.RealEstateDetailsViewModel
 
 <h1>Details</h1>
 
 <div>
-    <h4>RealEstates</h4>
+    <h4>Spaceships</h4>
     <hr />
     <dl class="row">
         <div class="form-group row">
@@ -12,13 +12,13 @@
         </div>
 
         <div class="form-group row">
-            <label asp-for="Size" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.Size)
+            <label asp-for="Location" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Location)
         </div>
 
         <div class="form-group row">
-            <label asp-for="Location" class="col-sm-2 col-form-label"></label>
-            @Html.DisplayFor(model => model.Location)
+            <label asp-for="Size" class="col-sm-2 col-form-label"></label>
+            @Html.DisplayFor(model => model.Size)
         </div>
 
         <div class="form-group row">
@@ -41,11 +41,11 @@
             @Html.DisplayFor(model => model.ModifiedAt)
         </div>
 
-       @foreach (var images in Model.Image)
+        @foreach (var images in Model.Image)
         {
             <partial name="_Images" model="images" />
         }
 
     </dl>
-    <a asp-action="Index" asp-controller="realestates" class="btn btn-danger">Back</a>
+    <a asp-action="Index" asp-controller="realEstates" class="btn btn-danger">Back</a>
 </div>

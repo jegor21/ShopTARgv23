@@ -63,7 +63,7 @@ namespace ShopTARgv23.ApplicationServices.Services
             var filePath = _webHost.ContentRootPath + "\\multipleFileUpload\\"
                 + imageId.ExistingFilePath;
 
-            if(File.Exists(filePath))
+            if (File.Exists(filePath))
             {
                 File.Delete(filePath);
             }
@@ -73,7 +73,6 @@ namespace ShopTARgv23.ApplicationServices.Services
 
             return null;
         }
-
 
         public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos)
         {
@@ -102,7 +101,7 @@ namespace ShopTARgv23.ApplicationServices.Services
         {
             if (dto.Files != null && dto.Files.Count > 0)
             {
-                foreach (var image in dto.Files) 
+                foreach (var image in dto.Files)
                 {
                     using (var target = new MemoryStream())
                     {
@@ -121,8 +120,9 @@ namespace ShopTARgv23.ApplicationServices.Services
                 }
             }
         }
+
         public async Task<FileToDatabase> RemoveImageFromDatabase(FileToDatabaseDto dto)
-        { 
+        {
             var image = await _context.FileToDatabases
                 .Where(x => x.Id == dto.Id)
                 .FirstOrDefaultAsync();
@@ -131,6 +131,22 @@ namespace ShopTARgv23.ApplicationServices.Services
             await _context.SaveChangesAsync();
 
             return image;
+        }
+
+
+        public async Task<FileToDatabase> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos)
+        {
+            foreach (var dto in dtos)
+            {
+                var image = await _context.FileToDatabases
+                    .Where(x => x.Id == dto.Id)
+                    .FirstOrDefaultAsync();
+
+                _context.FileToDatabases.Remove(image);
+                await _context.SaveChangesAsync();
+            }
+
+            return null;
         }
     }
 }
