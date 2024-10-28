@@ -1,6 +1,7 @@
 ﻿using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
+using ShopTARgv23.Data.Migrations;
 
 
 namespace ShopTARgv23.RealEstateTest
@@ -131,6 +132,41 @@ namespace ShopTARgv23.RealEstateTest
             var nullId = nullUpdate.Id;
 
             Assert.True(dto.Id == nullId);
+        }
+
+        [Fact]
+        public async Task ShouldNot_DeleteRealEstateAndLocationValue_WhenDeleteRealEstate()
+        {
+            RealEstateDto realEstateDto = MockRealEstateData();
+
+            var realEstate1 = await Svc<IRealEstateServices>().Create(realEstateDto);
+
+            var result = await Svc<IRealEstateServices>().Delete((Guid)realEstate1.Id);
+
+            Assert.False(string.IsNullOrEmpty(result.Location));
+        }
+
+        [Fact]
+
+        public async Task Should_UpdateByIdRealEstate_WhenReturnsNotEqual()
+        {
+            RealEstateDto realEstate = MockRealEstateData();
+
+            var addRealEstate = await Svc<IRealEstateServices>().Create(realEstate);
+            RealEstateDto update = MockUpdateRealEstateData();
+            var result = await Svc<IRealEstateServices>().Update(update);
+
+            Assert.NotEqual(addRealEstate.Id, result.Id);
+        }
+
+        [Fact]
+        public async Task Should_ReturnNull_WhenRealEstateDoesNotExist()
+        {
+            Guid nonExistingId = Guid.NewGuid();
+
+            var result = await Svc<IRealEstateServices>().GetAsync(nonExistingId);
+
+            Assert.Null(result);
         }
 
         private RealEstateDto MockRealEstateData()
