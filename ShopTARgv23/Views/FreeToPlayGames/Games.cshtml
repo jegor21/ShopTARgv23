@@ -1,5 +1,57 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<ShopTARgv23.Models.FreeToPlayGames.FreeToPlayGamesViewModel>
+
 @{
+    int rowNumber = 1;
 }
+
+<div class="container">
+    <h2>Free-To-Play Game</h2>
+    
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nr</th>
+
+                <th scope="col">Id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Thumbnail</th>
+                <th scope="col">Short Description</th>
+                <th scope="col">Game Url</th>
+                <th scope="col">Genre</th>
+                <th scope="col">Platform</th>
+                <th scope="col">Publisher</th>
+                <th scope="col">Developer</th>
+                <th scope="col">Release Date</th>
+                <th scope="col">FreeToGame Profile URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var freetoplaygames in Model)
+            {
+                <tr>
+                    <td>@rowNumber</td>
+
+                    <td>@freetoplaygames.Id</td>
+                    <td>@freetoplaygames.Title</td>
+                    <td>@freetoplaygames.Thumbnail</td>
+                    <td>@freetoplaygames.Short_description</td>
+                    <td>@freetoplaygames.Game_url</td>
+                    <td>@freetoplaygames.Genre</td>
+                    <td>@freetoplaygames.Platform</td>
+                    <td>@freetoplaygames.Developer</td>
+                    <td>@freetoplaygames.Release_date</td>
+                    <td>@freetoplaygames.Freetogame_profile_url</td>
+
+                </tr>
+
+                rowNumber++;
+            }
+        </tbody>
+    </table>
+    <div class="">
+        <form method="post">
+            <button asp-controller="freeToPlayGames" asp-action="searchFreeToPlayGames" class="btn btn-primary">Next</button>
+        </form>
+        <button asp-controller="freeToPlayGames" asp-action="index" class="btn btn-primary">Index</button>
+    </div>
+</div>

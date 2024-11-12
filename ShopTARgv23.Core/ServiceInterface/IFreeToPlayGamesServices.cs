@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ShopTARgv23.Core.Dto.FreeToPlayGamesRootDto;
+
 
 namespace ShopTARgv23.Core.ServiceInterface
 {
-    internal class IFreeToPlayGamesServices
+    public interface IFreeToPlayGamesServices
     {
+        Task<FreeToPlayGamesResultDto> FreeToPlayGamesResult(FreeToPlayGamesResultDto dto);
     }
 }
