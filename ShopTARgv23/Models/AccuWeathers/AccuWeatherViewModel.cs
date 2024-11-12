@@ -1,7 +1,6 @@
-﻿
-namespace ShopTARgv23.Core.Dto.WeatherDtos
+﻿namespace ShopTARgv23.Models.AccuWeathers
 {
-    public class AccuLocationWeatherResultDto
+    public class AccuWeatherViewModel
     {
         public string CityName { get; set; }
         public string CityCode { get; set; }
