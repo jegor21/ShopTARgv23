@@ -24,10 +24,10 @@ namespace ShopTARgv23.Controllers
             return RedirectToAction(nameof(Games));
         }
         [HttpGet]
-        public IActionResult Games()
+        public async IActionResult Games()
         {
             FreeToPlayGamesResultDto dto = new();
-            _freeToPlayGamesServices.FreeToPlayGamesResult(dto);
+            _freeToPlayGamesServices.FreeToPlayGamesResult();
             List<FreeToPlayGamesViewModel> vm = new();
 
             foreach (var freetoplaygames in vm)

@@ -5,6 +5,6 @@ namespace ShopTARgv23.Core.ServiceInterface
 {
     public interface IFreeToPlayGamesServices
     {
-        Task<FreeToPlayGamesResultDto> FreeToPlayGamesResult(FreeToPlayGamesResultDto dto);
+        Task<List<FreeToPlayGamesRootDto>> FreeToPlayGamesResult();
     }
 }
