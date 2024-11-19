@@ -1,10 +1,9 @@
-﻿using ShopTARgv23.Core.Dto.FreeToPlayGamesRootDto;
-
+﻿using ShopTARgv23.Core.Dto.FreeGamesDto;
 
 namespace ShopTARgv23.Core.ServiceInterface
 {
-    public interface IFreeToPlayGamesServices
+    public interface IFreeGameServices
     {
-        Task<List<FreeToPlayGamesRootDto>> FreeToPlayGamesResult();
+        Task<List<FreeGamesRootDto>> GetFreeGames();
     }
 }
