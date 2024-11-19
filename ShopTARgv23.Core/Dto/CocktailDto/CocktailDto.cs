@@ -1,8 +1,8 @@
-﻿namespace ShopTARgv23.Models.Cocktails
+﻿namespace ShopTARgv23.Core.Dto.CocktailDto
 {
-    public class CocktailsViewModel
+    public class CocktailDto
     {
-        public int idDrink { get; set; }
+        public int idDrink {  get; set; }
         public string strDrink { get; set; }
         public string strDrinkAlternate { get; set; }
         public string strTags { get; set; }
@@ -11,7 +11,7 @@
         public string strIBA { get; set; }
         public string strAlcoholic { get; set; }
         public string strGlass { get; set; }
-        public string strInstructions { get; set; }
+        public string strInstructions  { get; set; }
         public string strInstructionsES { get; set; }
         public string strInstructionsDE { get; set; }
         public string strInstructionsFR { get; set; }
