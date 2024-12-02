@@ -2,19 +2,23 @@
 using ShopTARgv23.Core.Dto.CocktailDto;
 using ShopTARgv23.Core.ServiceInterface;
 using System.Net;
+
+
 namespace ShopTARgv23.ApplicationServices.Services
 {
     public class CocktailServices : ICocktailServices
     {
-        public async Task<CocktailDto> GetCocktails(CocktailDto dto)
+        public async Task<CocktailResultDto> GetCocktails(CocktailResultDto dto)
         {
             string apiKey = "1";
             string apiCallUrl = $"https://www.thecocktaildb.com/api/json/v1/{apiKey}/search.php?s={dto.StrDrink}";
+
             using (WebClient client = new())
             {
                 string json = client.DownloadString(apiCallUrl);
                 CocktailRootDto cocktailResult = new JavaScriptSerializer()
                     .Deserialize<CocktailRootDto>(json);
+
                 dto.IdDrink = cocktailResult.Drinks[0].IdDrink;
                 dto.StrDrink = cocktailResult.Drinks[0].StrDrink;
                 dto.StrDrinkAlternate = cocktailResult.Drinks[0].StrDrinkAlternate;
@@ -67,6 +71,7 @@ namespace ShopTARgv23.ApplicationServices.Services
                 dto.StrCreativeCommonsConfirmed = cocktailResult.Drinks[0].StrCreativeCommonsConfirmed;
                 dto.DateModified = cocktailResult.Drinks[0].DateModified;
             }
+
             return dto;
         }
     }

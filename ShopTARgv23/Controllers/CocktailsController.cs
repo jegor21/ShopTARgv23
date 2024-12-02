@@ -1,65 +1,91 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ShopTARgv23.Core.Dto.CocktailsDto;
+using ShopTARgv23.Core.Dto.CocktailDto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Models.Cocktails;
 namespace ShopTARgv23.Controllers
 {
     public class CocktailsController : Controller
     {
-        private readonly ICocktailServices _cocktailsServices;
+        private readonly ICocktailServices _cocktailServices;
         public CocktailsController
             (
-                ICocktailServices cocktailsServices
+                ICocktailServices cocktailServices
             )
         {
-            _cocktailsServices = cocktailsServices;
+            _cocktailServices = cocktailServices;
         }
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult SearchCocktails(CocktailsViewModel model)
+        public IActionResult SearchCocktails(SearchCocktailViewModel model)
         {
-            return RedirectToAction(nameof(Cocktail));
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Cocktail", "Cocktails", new { cocktail = model.SearchCocktail });
+            }
+            return View(model);
         }
         [HttpGet]
-        public IActionResult Cocktail()
+        public IActionResult Cocktail(string cocktail)
         {
-            CocktailDto dto = new();
-            _cocktailsServices.GetCocktails(dto);
-            CocktailsViewModel vm = new();
-            vm.idDrink = dto.idDrink;
-            vm.strDrink = dto.strDrink;
-            vm.strDrinkAlternate = dto.strDrinkAlternate;
-            vm.strTags = dto.strTags;
-            vm.strCategory = dto.strCategory;
-            vm.strIBA = dto.strIBA;
-            vm.strAlcoholic = dto.strAlcoholic;
-            vm.strGlass = dto.strGlass;
-            vm.strInstructions = dto.strInstructions;
-            vm.strInstructionsES = dto.strInstructionsES;
-            vm.strInstructionsDE = dto.strInstructionsDE;
-            vm.strInstructionsFR = dto.strInstructionsFR;
-            vm.strInstructionsIT = dto.strInstructionsIT;
-            vm.strDrinkThumb = dto.strDrinkThumb;
-            vm.strIngredient1 = dto.strIngredient1;
-            vm.strIngredient2 = dto.strIngredient2;
-            vm.strIngredient3 = dto.strIngredient3;
-            vm.strIngredient4 = dto.strIngredient4;
-            vm.strIngredient5 = dto.strIngredient5;
-            vm.strIngredient6 = dto.strIngredient6;
-            vm.strIngredient7 = dto.strIngredient7;
-            vm.strIngredient8 = dto.strIngredient8;
-            vm.strIngredient9 = dto.strIngredient9;
-            vm.strIngredient10 = dto.strIngredient10;
-            vm.strIngredient11 = dto.strIngredient11;
-            vm.strIngredient12 = dto.strIngredient12;
-            vm.strIngredient13 = dto.strIngredient13;
-            vm.strIngredient14 = dto.strIngredient14;
-            vm.strIngredient15 = dto.strIngredient15;
-            vm
-
+            CocktailResultDto dto = new();
+            dto.StrDrink = cocktail;
+            _cocktailServices.GetCocktails(dto);
+            CocktailViewModel vm = new();
+            vm.IdDrink = dto.IdDrink;
+            vm.StrDrink = dto.StrDrink;
+            vm.StrDrinkAlternate = dto.StrDrinkAlternate;
+            vm.StrTags = dto.StrTags;
+            vm.StrVideo = dto.StrVideo;
+            vm.StrCategory = dto.StrCategory;
+            vm.StrIBA = dto.StrIBA;
+            vm.StrAlcoholic = dto.StrAlcoholic;
+            vm.StrGlass = dto.StrGlass;
+            vm.StrInstructions = dto.StrInstructions;
+            vm.StrInstructionsES = dto.StrInstructionsES;
+            vm.StrInstructionsDE = dto.StrInstructionsDE;
+            vm.StrInstructionsFR = dto.StrInstructionsFR;
+            vm.StrInstructionsIT = dto.StrInstructionsIT;
+            vm.StrInstructionsZHHANS = dto.StrInstructionsZHHANS;
+            vm.StrInstructionsZHHANT = dto.StrInstructionsZHHANT;
+            vm.StrDrinkThumb = dto.StrDrinkThumb;
+            vm.StrIngredient1 = dto.StrIngredient1;
+            vm.StrIngredient2 = dto.StrIngredient2;
+            vm.StrIngredient3 = dto.StrIngredient3;
+            vm.StrIngredient4 = dto.StrIngredient4;
+            vm.StrIngredient5 = dto.StrIngredient5;
+            vm.StrIngredient6 = dto.StrIngredient6;
+            vm.StrIngredient7 = dto.StrIngredient7;
+            vm.StrIngredient8 = dto.StrIngredient8;
+            vm.StrIngredient9 = dto.StrIngredient9;
+            vm.StrIngredient10 = dto.StrIngredient10;
+            vm.StrIngredient11 = dto.StrIngredient11;
+            vm.StrIngredient12 = dto.StrIngredient12;
+            vm.StrIngredient13 = dto.StrIngredient13;
+            vm.StrIngredient14 = dto.StrIngredient14;
+            vm.StrIngredient15 = dto.StrIngredient15;
+            vm.StrMeasure1 = dto.StrMeasure1;
+            vm.StrMeasure2 = dto.StrMeasure2;
+            vm.StrMeasure3 = dto.StrMeasure3;
+            vm.StrMeasure4 = dto.StrMeasure4;
+            vm.StrMeasure5 = dto.StrMeasure5;
+            vm.StrMeasure6 = dto.StrMeasure6;
+            vm.StrMeasure7 = dto.StrMeasure7;
+            vm.StrMeasure8 = dto.StrMeasure8;
+            vm.StrMeasure9 = dto.StrMeasure9;
+            vm.StrMeasure10 = dto.StrMeasure10;
+            vm.StrMeasure11 = dto.StrMeasure11;
+            vm.StrMeasure12 = dto.StrMeasure12;
+            vm.StrMeasure13 = dto.StrMeasure13;
+            vm.StrMeasure14 = dto.StrMeasure14;
+            vm.StrMeasure15 = dto.StrMeasure15;
+            vm.StrImageSource = dto.StrImageSource;
+            vm.StrImageAttribution = dto.StrImageAttribution;
+            vm.StrCreativeCommonsConfirmed = dto.StrCreativeCommonsConfirmed;
+            vm.DateModified = dto.DateModified;
             return View(vm);
         }
     }
