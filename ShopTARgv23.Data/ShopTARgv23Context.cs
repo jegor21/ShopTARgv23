@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.Domain;
 
 namespace ShopTARgv23.Data
 {
-    public class ShopTARgv23Context : DbContext
+    public class ShopTARgv23Context : IdentityDbContext<ApplicationUser>
     {
         public ShopTARgv23Context(DbContextOptions<ShopTARgv23Context> options)
             : base(options) { }
