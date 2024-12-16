@@ -4,6 +4,7 @@ using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using MailKit.Net.Smtp;
 using System.Net.Mail;
+using SmtpClient = MailKit.Net.Smtp.SmtpClient;
 
 
 namespace ShopTARgv23.ApplicationServices.Services
@@ -49,6 +50,32 @@ namespace ShopTARgv23.ApplicationServices.Services
             }
             email.Body = builder.ToMessageBody();
 
+            using var smtp = new MailKit.Net.Smtp.SmtpClient();
+
+            smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
+            smtp.Authenticate(_config.GetSection("EmailUserName").Value, _config.GetSection("EmailPassword").Value);
+            smtp.Send(email);
+            smtp.Disconnect(true);
+        }
+
+        public void SendEmailToken(EmailTokenDto dto, string token)
+        {
+            dto.Token = token;
+            var email = new MimeMessage();
+
+            _config.GetSection("EmailUserName").Value = "superMario";
+            _config.GetSection("EmailHost").Value = "smtp.gmail.com";
+            _config.GetSection("EmailPassword").Value = "";
+
+            email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
+            email.To.Add(MailboxAddress.Parse(dto.To));
+            email.Subject = dto.Subject;
+            var builder = new BodyBuilder
+            {
+                HtmlBody = dto.Body,
+            };
+
+            email.Body = builder.ToMessageBody();
             using var smtp = new SmtpClient();
 
             smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
