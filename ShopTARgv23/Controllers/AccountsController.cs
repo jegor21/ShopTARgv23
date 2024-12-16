@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.V4.Pages.Account.Manage.Internal;
 using Microsoft.AspNetCore.Mvc;
 using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Models.Accounts;
@@ -16,16 +15,16 @@ namespace ShopTARgv23.Controllers
             (
                 UserManager<ApplicationUser> userManager,
                 SignInManager<ApplicationUser> signInManager
-            ) 
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
+
         [HttpGet]
         public IActionResult Register()
         {
-            
             return View();
         }
 
@@ -40,6 +39,7 @@ namespace ShopTARgv23.Controllers
                     UserName = vm.Email,
                     Email = vm.Email,
                     City = vm.City,
+                    FirstName = vm.FirstName,
                 };
 
                 var result = await _userManager.CreateAsync(user, vm.Password);
@@ -51,7 +51,7 @@ namespace ShopTARgv23.Controllers
 
                     if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {
-                        return RedirectToAction("ListUsers", "Admins");
+                        return RedirectToAction("ListUsers", "Administrations");
                     }
 
                     ViewBag.ErrorTitle = "Registration succesful";
@@ -110,6 +110,10 @@ namespace ShopTARgv23.Controllers
                     }
                     else
                     {
+                        //ApplicationUser applicationUser = new();
+
+                        //model.FirstName = applicationUser.FirstName;
+
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -121,6 +125,98 @@ namespace ShopTARgv23.Controllers
 
                 ModelState.AddModelError("", "Invalid Login Attempt");
             }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.GetUserAsync(User);
+
+                if (user == null)
+                {
+                    return RedirectToAction("Login");
+                }
+
+                var result = await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
+
+                if (!result.Succeeded)
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+
+                    return View();
+                }
+
+                await _signInManager.RefreshSignInAsync(user);
+                return View("ChangePasswordConfirmation");
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user != null && await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+                    var passwordResetLink = Url.Action("ResetPassword", "Accounts", new { email = model.Email, token = token }, Request.Scheme);
+
+                    return View("ForgotPasswordConfirmation");
+                }
+                return View("ForgotPasswordConfirmation");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            if (token == null || user.Email == null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
+
+            var model = new ResetPasswordViewModel
+            {
+                Token = token,
+                Email = user.Email
+            };
 
             return View(model);
         }

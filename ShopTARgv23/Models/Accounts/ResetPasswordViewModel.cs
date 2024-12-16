@@ -2,7 +2,7 @@
 
 namespace ShopTARgv23.Models.Accounts
 {
-    public class RegisterViewModel
+    public class ResetPasswordViewModel
     {
         [Required]
         [EmailAddress]
@@ -17,8 +17,6 @@ namespace ShopTARgv23.Models.Accounts
         [Compare("Password", ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        public string City { get; set; }
-
-        public string FirstName { get; set; }
+        public string Token { get; set; }
     }
 }

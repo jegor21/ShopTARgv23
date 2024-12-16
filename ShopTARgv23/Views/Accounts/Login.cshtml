@@ -22,7 +22,7 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 
-            <div class="fomr-group">
+            <div class="form-group">
                 <div class="checkbox">
                     <label asp-for="RememberMe">
                         <input asp-for="RememberMe" />
@@ -46,7 +46,8 @@
         @{
             if(Model.ExternalLogins.Count == 0)
             {
-                <div>No external login</div>                }
+                <div>no external login</div>
+            }
         }
     </div>
 </div>
