@@ -61,9 +61,9 @@ namespace ShopTARgv23.ApplicationServices.Services
             dto.Token = token;
             var email = new MimeMessage();
 
-            _config.GetSection("EmailUserName").Value = "";
+            _config.GetSection("EmailUserName").Value = "maksimikperk@gmail.com";
             _config.GetSection("EmailHost").Value = "smtp.gmail.com";
-            _config.GetSection("EmailPassword").Value = "semn tnmv wosb cdwd";
+            _config.GetSection("EmailPassword").Value = "glzr cvsq tkgh vfqk";
 
             email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
             email.To.Add(MailboxAddress.Parse(dto.To));

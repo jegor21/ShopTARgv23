@@ -65,7 +65,7 @@ namespace ShopTARgv23.Controllers
 
                     EmailTokenDto newsignup = new();
                     newsignup.Token = token;
-                    newsignup.Body = $"Please registrate your account by: <a href=\"{confirmationLink}\">clicking here</a>;";
+                    newsignup.Body = $"Please registrate your account by: <a href=\"{confirmationLink}\">clicking here</a>";
                     newsignup.Subject = "CRUD registration";
                     newsignup.To = user.Email;
 
@@ -261,22 +261,41 @@ namespace ShopTARgv23.Controllers
                 if (user != null && await _userManager.IsEmailConfirmedAsync(user))
                 {
                     var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
                     var passwordResetLink = Url.Action("ResetPassword", "Accounts", new { email = model.Email, token = token }, Request.Scheme);
 
-                    return View("ForgotPasswordConfirmation");
+                    EmailTokenDto passReset = new();
+                    passReset.Token = token;
+                    passReset.Body = $"Please reset your password: <a href=\"{passwordResetLink}\">clicking here</a>";
+                    passReset.Subject = "CRUD password reset";
+                    passReset.To = user.Email;
+
+                    _emailsServices.SendEmailToken(passReset, token);
+                    List<string> errordatas =
+                        [
+                        "Area", "Accounts",
+                        "Issue", "Success",
+                        "StatusMessage", "Registration Success",
+                        "ActedOn", $"{model.Email}",
+                        "CreatedAccountData", $"{model.Email}\n\n[password hidden]\n[password hidden]"
+                        ];
+                    ViewBag.ErrorDatas = errordatas;
+                    ViewBag.ErrorTitle = "You have successfully changed password";
+                    ViewBag.ErrorMessage = "Before you can log in, please reset password from the link" +
+                        "\nwe have emailed to your email address.";
+
+                    return View("ChangePasswordMessage");
                 }
-                return View("ForgotPasswordConfirmation");
+                return View(model);
             }
             return View(model);
         }
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ResetPassword()
+        public async Task<IActionResult> ResetPassword(string userId, string token)
         {
             var user = await _userManager.GetUserAsync(User);
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            token = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             if (token == null || user.Email == null)
             {
